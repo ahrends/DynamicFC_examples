@@ -1,0 +1,4 @@
+# ignore temporary Matlab files
+*.asv
+# ignore Matlab figures
+*.fig
