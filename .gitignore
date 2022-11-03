@@ -1,4 +1,4 @@
 # ignore temporary Matlab files
 *.asv
-# ignore Matlab figures
+# ignore Matlab figures (remove for visualisation checks)
 *.fig
