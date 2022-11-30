@@ -19,7 +19,7 @@ total_session_duration = size(X,1); % no. of timepoints
 window_length = 100;
 C = zeros(p,p,total_session_duration - window_length + 1);
 for t = 1:total_session_duration - window_length + 1
-C(:,:,t) = corr(X(t:t+window_length-1,:));
+    C(:,:,t) = corr(X(t:t+window_length-1,:));
 end
 
 % k-means clustering:
@@ -27,14 +27,14 @@ end
 N_windows = total_session_duration - window_length + 1;
 C_unwrapped = zeros(N_windows,p*(p-1)/2);
 for j = 1:N_windows
-Cj = C(:,:,j); Cj = Cj(triu(true(p),1));
-C_unwrapped(j,:) = Cj(:);
+    Cj = C(:,:,j); Cj = Cj(triu(true(p),1));
+    C_unwrapped(j,:) = Cj(:);
 end
 K = 4; % example for 4 states
 idx = kmeans(C_unwrapped,K); % cluster assignment of each timepoints FC estimate
 state_time_courses = zeros(length(total_session_duration),K);
 for k = 1:K
-   state_time_courses(idx==k,k) = 1; % timecourses of all K states (rows are timepoints, columns are states)
+    state_time_courses(idx==k,k) = 1; % timecourses of all K states (rows are timepoints, columns are states)
 end
 
 % get the fractional occupancies of all states and display state time courses
@@ -71,6 +71,7 @@ for t = 1:total_session_duration
     Eigenvectors(t,:) = v(:,i);
 end
 
-[idx,eigen_centroids] = kmeans(Eigenvectors,4);
+K = 4; % Example for 4 states
+[idx,eigen_centroids] = kmeans(Eigenvectors,K);
 % idx assigns a state to each timepoint, eigen_centroids define states
 
