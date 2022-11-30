@@ -41,7 +41,9 @@ end
 mean(state_time_courses)
 area(state_time_courses)
 
-%% Leading Eigenvector Dynamic Analysis (LEiDA)
+%% Leading Eigenvector Dynamics Analysis (LEiDA)
+% see https://github.com/juanitacabral/LEiDA (Cabral et al., Sci Rep 2017) 
+% for full functionality
 
 clear C idx
 
