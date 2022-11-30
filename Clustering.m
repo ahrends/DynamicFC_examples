@@ -32,7 +32,7 @@ for j = 1:N_windows
 end
 K = 4; % example for 4 states
 idx = kmeans(C_unwrapped,K); % cluster assignment of each timepoints FC estimate
-state_time_courses = zeros(length(total_session_duration),K);
+state_time_courses = zeros(total_session_duration,K);
 for k = 1:K
     state_time_courses(idx==k,k) = 1; % timecourses of all K states (rows are timepoints, columns are states)
 end
