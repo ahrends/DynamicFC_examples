@@ -14,6 +14,7 @@ n_subs = 10; % number of subjects/sessions
 n_ts = 100; % number of timepoints per subject/session
 T = repmat(n_ts,[n_subs,1]); % either double or cell of length n_subs 
 % where each entry is the number of timepoints for that subject
+
 %% requires HMM-MAR toolbox
 % available at https://github.com/OHBA-analysis/HMM-MAR
 
@@ -29,14 +30,17 @@ options.covtype = 'full'; % states are defined by a full covariance matrix (FC)
 % hmm is the HMM structure, Gamma are the state probabilities, vpath is the
 % Viterbi path (state time courses)
 
+%% query fractional occupancies and plot state timecourses
+
 FO = getFractionalOccupancy(Gamma,T,options);
 for k = 1:8
    state_time_courses(vpath==k,k) = 1; % timecourses of all K states (rows are timepoints, columns are states)
 end
-% display fractional occupancies:
-% fraction of each subject's timecourse spent in each state
+
+% plot FO (fraction of each subject's timecourse spent in each state)
 figure; imagesc(FO)
-% state visits over time, e.g. for subject 1
+
+% plot state visits over time, e.g. for subject 1
 figure; area(state_time_courses(1:T(1),:)) 
 % compare to state probabilities over time
 figure; area(Gamma(1:T(1),:)); ylim([0,1])
