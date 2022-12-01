@@ -53,6 +53,11 @@ end
 
 %% compare performance of HMM and clustering approach
 
+% running this part takes a while, so model accuracies on 100 random 
+% iterations of the below simulations are also provided (note though that
+% these are not exactly the same as in the main text):
+% load('accuracies_sim.mat')
+
 % running the HMM requires the HMM-MAR toolbox (available at
 % https://github.com/OHBA-analysis/HMM-MAR)
 addpath(genpath('/HMM-MAR-master'))
@@ -150,8 +155,9 @@ for n = 1:100 % number of iterations
     end
 end
 
-save('accuracies_sim.mat', 'accuracy_hmm', 'accuracy_clustering');
+% save('accuracies_sim.mat', 'accuracy_hmm', 'accuracy_clustering');
 
+% create Figure 9
 transition_label = {'Faster', 'Slower'};
 statevar_label = {'larger', 'medium', 'smaller'};
 
@@ -167,3 +173,4 @@ for jj = 1:3
         title([transition_label{i} ' transitions, ' statevar_label{jj} ' state variations']);
     end
 end
+
