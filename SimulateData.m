@@ -170,7 +170,7 @@ for jj = 1:3
         swarmchart((ones(100,1)+1),squeeze(accuracy_hmm(i,jj,:)), '.');
         xlim([0,3]); xticks([1,2]), xticklabels({'clustering','HMM'}); 
         ylim([0,1]); ylabel('Accuracy');
-        title([transition_label{i} ' transitions, ' statevar_label{jj} ' state variations']);
+        title([transition_label{i} ' transitions, ' statevar_label{jj} ' state variations']); hold off;
     end
 end
 
