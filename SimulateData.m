@@ -76,6 +76,7 @@ options.zeromean = 1; % states only have a covariance matrix
 % set up sliding window clustering options
 window_length = 100;
 N_windows = total_session_duration - window_length + 1;
+rng('shuffle')
 
 for n = 1:100 % number of iterations
     for jj = 1:3
@@ -149,3 +150,20 @@ for n = 1:100 % number of iterations
     end
 end
 
+save('accuracies_sim.mat', 'accuracy_hmm', 'accuracy_clustering');
+
+transition_label = {'Faster', 'Slower'};
+statevar_label = {'larger', 'medium', 'smaller'};
+
+figure;
+for jj = 1:3
+    for i = 1:2
+        subplot(3,2,(jj-1)*2+(i*-1+3)); 
+        bar([1,2],[mean(accuracy_clustering(i,jj,:)), mean(accuracy_hmm(i,jj,:))], 'w'); hold on;
+        swarmchart(ones(100,1),squeeze(accuracy_clustering(i,jj,:)),'.');
+        swarmchart((ones(100,1)+1),squeeze(accuracy_hmm(i,jj,:)), '.');
+        xlim([0,3]); xticks([1,2]), xticklabels({'clustering','HMM'}); 
+        ylim([0,1]); ylabel('Accuracy');
+        title([transition_label{i} ' transitions, ' statevar_label{jj} ' state variations']);
+    end
+end
